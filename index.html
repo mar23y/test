@@ -18,15 +18,255 @@
     getEarthquakeDataButton.addEventListener('click', async () => {
       const earthquakeIndex = document.getElementById('earthquake-index').value;
 
-      const earthquakeDataResponse = await fetch(`http://localhost:8545/earthquake-data/${earthquakeIndex}`);
-      const earthquakeData = await earthquakeDataResponse.json();
+      // Get the Web3 provider.
+      const web3 = new Web3('http://localhost:8545');
 
+      // Get the smart contract contract.
+      const earthquakeDataContract = new web3.eth.Contract([
+      [
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index1",
+				"type": "uint256"
+			}
+		],
+		"name": "getEarthquakes1",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "index1",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "Time1",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "Depth1",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "City1",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "magnitude1",
+						"type": "string"
+					}
+				],
+				"internalType": "struct EarthquakeData.Earthquake1",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index2",
+				"type": "uint256"
+			}
+		],
+		"name": "getEarthquakes2",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "index2",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "Time2",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "Depth2",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "City2",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "magnitude2",
+						"type": "string"
+					}
+				],
+				"internalType": "struct EarthquakeData.Earthquake2",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index3",
+				"type": "uint256"
+			}
+		],
+		"name": "getEarthquakes3",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "index3",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "Time3",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "Depth3",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "City3",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "magnitude3",
+						"type": "string"
+					}
+				],
+				"internalType": "struct EarthquakeData.Earthquake3",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index4",
+				"type": "uint256"
+			}
+		],
+		"name": "getEarthquakes4",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "index4",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "Time4",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "Depth4",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "City4",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "magnitude4",
+						"type": "string"
+					}
+				],
+				"internalType": "struct EarthquakeData.Earthquake4",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index5",
+				"type": "uint256"
+			}
+		],
+		"name": "getEarthquakes5",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "index5",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "Time5",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "Depth5",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "City5",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "magnitude5",
+						"type": "string"
+					}
+				],
+				"internalType": "struct EarthquakeData.Earthquake5",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+      ]);
+
+      // Get the earthquake data.
+      const earthquakeData = await earthquakeDataContract.methods.getEarthquakes1(earthquakeIndex).call();
+
+      // Display the earthquake data.
       earthquakeData.innerHTML = `
         <ul>
-          <li>Time: ${earthquakeData.Time}</li>
-          <li>Depth: ${earthquakeData.Depth}</li>
-          <li>City: ${earthquakeData.City}</li>
-          <li>Magnitude: ${earthquakeData.Magnitude}</li>
+          <li>Time: ${earthquakeData.Time1}</li>
+          <li>Depth: ${earthquakeData.Depth1}</li>
+          <li>City: ${earthquakeData.City1}</li>
+          <li>Magnitude: ${earthquakeData.magnitude1}</li>
         </ul>
       `;
     });
