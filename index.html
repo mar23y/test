@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Earthquake Data</title>
+</head>
+<body>
+  <h1>Earthquake Data</h1>
+
+  <input type="number" id="earthquake-index" placeholder="Enter earthquake index...">
+  <button type="button" id="get-earthquake-data">Get Data</button>
+
+  <div id="earthquake-data"></div>
+
+  <script>
+    const earthquakeData = document.getElementById('earthquake-data');
+    const getEarthquakeDataButton = document.getElementById('get-earthquake-data');
+
+    getEarthquakeDataButton.addEventListener('click', async () => {
+      const earthquakeIndex = document.getElementById('earthquake-index').value;
+
+      const earthquakeDataResponse = await fetch(`'https://https://mainnet.infura.io/v3/f0721c38025b4529afba08eeff72be74/web3/eth/earthquake-data/${earthquakeIndex}`);
+      const earthquakeData = await earthquakeDataResponse.json();
+
+      earthquakeData.innerHTML = `
+        <ul>
+          <li>Time: ${earthquakeData.Time}</li>
+          <li>Depth: ${earthquakeData.Depth}</li>
+          <li>City: ${earthquakeData.City}</li>
+          <li>Magnitude: ${earthquakeData.Magnitude}</li>
+        </ul>
+      `;
+    });
+  </script>
+</body>
+</html>
