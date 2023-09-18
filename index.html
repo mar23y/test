@@ -18,7 +18,7 @@
     getEarthquakeDataButton.addEventListener('click', async () => {
       const earthquakeIndex = document.getElementById('earthquake-index').value;
 
-      const earthquakeDataResponse = await fetch(`'https://https://mainnet.infura.io/v3/f0721c38025b4529afba08eeff72be74/web3/eth/earthquake-data/${earthquakeIndex}`);
+      const earthquakeDataResponse = await fetch(`http://localhost:8545/earthquake-data/${earthquakeIndex}`);
       const earthquakeData = await earthquakeDataResponse.json();
 
       earthquakeData.innerHTML = `
